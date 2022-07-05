@@ -11,7 +11,7 @@
         <link href="../resources/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
 
-    <body class="h-100 text-center text-dark bg-white">
+    <body class="text-center text-dark bg-white">
 
         <!-- Icons -->
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -69,19 +69,18 @@
         <div class="container-fluid mx-0">
             <div class="row">
                 <div class="col-md-6 float-left mx-0 px-0">
-                    <img src="../resources/images/ARPhotoView.png" class='img-fluid' style="object-fit: cover;" alt="A R Photo View">
+                    <img src="../resources/images/ARPhotoView/ARPhotoView.png" class='img-fluid' style="object-fit: cover;" alt="A R Photo View">
                 </div>
                 <div class="col-md-6 float-right my-auto py-3">
                     <h1 class="py-3">
                         ARPhotoView
                     </h1>
                     <p class="text-muted mx-5">
-                        ARPhotoView is an iOS app written in Swift that allows users to take or select images to view in augmented reality the iPhone's camera
+                        ARPhotoView is an iOS app written in Swift that allows users to take or select images to view in augmented reality through the iPhone's camera.
                     </p>
                 </div>
             </div>
             <div class="row bg-dark text-light py-4">
-                <h2 class="">DOWNLOAD</h2>
                 <a style="width:119.66407px;height:40px;" class="px-0 mx-auto" href="https://apps.apple.com/us/app/arphotoview/id1514533962?ls=1">
                     <img src="../resources/images/App-Store.svg" class="img-fluid" ></img>
                 </a>
@@ -90,8 +89,38 @@
                 <h2 class="">Check out this demo of ARPhotoView</h2>
                 <iframe width="auto" height="500" src="https://www.youtube.com/embed/62xxGCoLtcg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="container py-3 bg-dark text-light">
-                <h2>SCREENSHOTS</h2>
+            <div class="row py-3 bg-dark text-light">
+                <h2>Screenshots</h2>
+                <div id="carousel" class="carousel slide p-3" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      <button type="button" data-bs-target="#carousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner" style="height:500px">
+                      <div class="carousel-item active">
+                        <img src="../resources/images/ARPhotoView/Preview1.jpeg" class="d-block img-fluid mx-auto" style="height:500px;max-height:500px;width:auto;object-fit:contain;" alt="Preview 1">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="../resources/images/ARPhotoView/Preview2.png" class="d-block img-fluid mx-auto" style="height:500px;max-height:500px;width:auto;object-fit:contain;" alt="Preview 2">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="../resources/images/ARPhotoView/Preview3.jpeg" class="d-block img-fluid mx-auto" style="height:500px;max-height:500px;width:auto;object-fit:contain;" alt="Preview 3">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="../resources/images/ARPhotoView/Preview4.png" class="d-block img-fluid mx-auto" style="height:500px;max-height:500px;width:auto;object-fit:contain;" alt="Preview 4">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
             </div>
             <a class="row btn btn-lg btn-dark my-3" href="arphotoview-privacy.html" role="button">ARPhotoView Privacy Policy</a>
         </div>
