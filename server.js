@@ -1,5 +1,10 @@
 /**
  * This is the main web server for smcshane.com
+ * 
+ * TODO:
+ * - Get certificate signed
+ * - Accept post on contact.html
+ * - Read files only once at startup of server
  */
 
 const express = require('express')
@@ -8,6 +13,8 @@ const fsp = require('fs').promises
 const https = require('https')
 
 const app = express()
+
+// Port for server to listen on; HTTPS port
 const port = 443
 
 // Read in self-signed certificate for HTTPS
@@ -144,6 +151,7 @@ app.get('/upick', (req, res) => {
 // include static/ in path, instead start at resources/
 app.use(express.static('static'))
 
+// Create HTTPS server
 var server = https.createServer(options, app);
 
 // Start server
