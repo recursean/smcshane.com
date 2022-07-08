@@ -11,8 +11,8 @@ const app = express()
 const port = 443
 
 // Read in self-signed certificate for HTTPS
-var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
-var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
+var key = fs.readFileSync(__dirname + '/../certs/selfsigned.key');
+var cert = fs.readFileSync(__dirname + '/../certs/selfsigned.crt');
 var options = {
   key: key,
   cert: cert
