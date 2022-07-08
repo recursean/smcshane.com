@@ -1,17 +1,26 @@
 /**
  * This is the main web server for smcshane.com
- * 
- * Run as long-running task with "nohup npm start &"
  */
 
 const express = require('express')
-const server = express()
-const fs = require('fs').promises;
-const port = 80
+const fs = require('fs')
+const fsp = require('fs').promises
+const https = require('https')
+
+const app = express()
+const port = 443
+
+// Read in self-signed certificate for HTTPS
+var key = fs.readFileSync(__dirname + '/certs/selfsigned.key');
+var cert = fs.readFileSync(__dirname + '/certs/selfsigned.crt');
+var options = {
+  key: key,
+  cert: cert
+};
 
 // arphotoview-privacy.html
-server.get('/arphotoview-privacy', (req, res) => {
-    fs.readFile(__dirname + "/html/arphotoview-privacy.html")
+app.get('/arphotoview-privacy', (req, res) => {
+    fsp.readFile(__dirname + "/html/arphotoview-privacy.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -25,8 +34,8 @@ server.get('/arphotoview-privacy', (req, res) => {
 })
 
 // arphotoview.html
-server.get('/arphotoview', (req, res) => {
-    fs.readFile(__dirname + "/html/arphotoview.html")
+app.get('/arphotoview', (req, res) => {
+    fsp.readFile(__dirname + "/html/arphotoview.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -40,8 +49,8 @@ server.get('/arphotoview', (req, res) => {
 })
 
 // contact.html
-server.get('/contact', (req, res) => {
-    fs.readFile(__dirname + "/html/contact.html")
+app.get('/contact', (req, res) => {
+    fsp.readFile(__dirname + "/html/contact.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -55,8 +64,8 @@ server.get('/contact', (req, res) => {
 })
 
 // index.html
-server.get('/', (req, res) => {
-    fs.readFile(__dirname + "/html/index.html")
+app.get('/', (req, res) => {
+    fsp.readFile(__dirname + "/html/index.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -70,8 +79,8 @@ server.get('/', (req, res) => {
 })
 
 // newscloud.html
-server.get('/newscloud', (req, res) => {
-    fs.readFile(__dirname + "/html/newscloud.html")
+app.get('/newscloud', (req, res) => {
+    fsp.readFile(__dirname + "/html/newscloud.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -85,8 +94,8 @@ server.get('/newscloud', (req, res) => {
 })
 
 // saf.html
-server.get('/saf', (req, res) => {
-    fs.readFile(__dirname + "/html/saf.html")
+app.get('/saf', (req, res) => {
+    fsp.readFile(__dirname + "/html/saf.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -100,8 +109,8 @@ server.get('/saf', (req, res) => {
 })
 
 // upick-privacy.html
-server.get('/upick-privacy', (req, res) => {
-    fs.readFile(__dirname + "/html/upick-privacy.html")
+app.get('/upick-privacy', (req, res) => {
+    fsp.readFile(__dirname + "/html/upick-privacy.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -115,8 +124,8 @@ server.get('/upick-privacy', (req, res) => {
 })
 
 // upick.html
-server.get('/upick', (req, res) => {
-    fs.readFile(__dirname + "/html/upick.html")
+app.get('/upick', (req, res) => {
+    fsp.readFile(__dirname + "/html/upick.html")
         .then(contents => {
             res.setHeader("Content-Type", "text/html");
             res.writeHead(200);
@@ -133,7 +142,9 @@ server.get('/upick', (req, res) => {
 // The below causes 'static' to not be part of the URL when static content
 // is requested. So, when requesting static content from HTML pages, do not
 // include static/ in path, instead start at resources/
-server.use(express.static('static'))
+app.use(express.static('static'))
+
+var server = https.createServer(options, app);
 
 // Start server
 server.listen(port, () => {
