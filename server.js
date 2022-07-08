@@ -17,9 +17,9 @@ const app = express()
 // Port for server to listen on; HTTPS port
 const port = 443
 
-// Read in self-signed certificate for HTTPS
-var key = fs.readFileSync(__dirname + '/../certs/selfsigned.key');
-var cert = fs.readFileSync(__dirname + '/../certs/selfsigned.crt');
+// Read in certificate for HTTPS
+var key = fs.readFileSync('/etc/letsencrypt/live/smcshane.com/privkey.pem');
+var cert = fs.readFileSync('/etc/letsencrypt/live/smcshane.com/fullchain.pem');
 var options = {
   key: key,
   cert: cert
@@ -144,6 +144,9 @@ app.get('/upick', (req, res) => {
             return;
         });
 })
+
+console.log('== SERVER STARTING ==')
+console.log(new Date())
 
 // Allow static content to be automatically served from resources directory.
 // The below causes 'static' to not be part of the URL when static content
