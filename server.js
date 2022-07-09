@@ -2,28 +2,24 @@
  * This is the main web server for smcshane.com
  * 
  * TODO:
- * - Get certificate signed
  * - Accept post on contact.html
  * - Read files only once at startup of server
  */
 
 const express = require('express')
+const bp = require('body-parser')
 const fs = require('fs')
 const fsp = require('fs').promises
 const https = require('https')
+const http = require('http');
 
 const app = express()
+const httpApp = express()
 
-// Port for server to listen on; HTTPS port
-const port = 443
-
-// Read in certificate for HTTPS
-var key = fs.readFileSync('/etc/letsencrypt/live/smcshane.com/privkey.pem');
-var cert = fs.readFileSync('/etc/letsencrypt/live/smcshane.com/fullchain.pem');
-var options = {
-  key: key,
-  cert: cert
-};
+// Redirect all HTTP traffic to HTTPS
+httpApp.get('*', (req, res) => {
+    res.redirect('https://' + req.headers.host + req.url);
+})
 
 // arphotoview-privacy.html
 app.get('/arphotoview-privacy', (req, res) => {
@@ -55,7 +51,7 @@ app.get('/arphotoview', (req, res) => {
         });
 })
 
-// contact.html
+// contact.html - GET
 app.get('/contact', (req, res) => {
     fsp.readFile(__dirname + "/html/contact.html")
         .then(contents => {
@@ -68,6 +64,15 @@ app.get('/contact', (req, res) => {
             res.end(err);
             return;
         });
+})
+
+// contact.html - POST
+app.post('/contact', (req, res) => {
+    console.log(req)
+    // console.log(`email: ${req.body.email}`)
+    // console.log(`message: ${req.body.message}`)
+    res.writeHead(200)
+    res.end()
 })
 
 // index.html
@@ -148,16 +153,35 @@ app.get('/upick', (req, res) => {
 console.log('== SERVER STARTING ==')
 console.log(new Date())
 
+// Port for server to listen on; HTTPS port
+const httpsPort = 443
+const httpPort = 80
+
+// Read in certificate for HTTPS
+var key = fs.readFileSync('/etc/letsencrypt/live/smcshane.com/privkey.pem');
+var cert = fs.readFileSync('/etc/letsencrypt/live/smcshane.com/fullchain.pem');
+var options = {
+  key: key,
+  cert: cert
+};
+
 // Allow static content to be automatically served from resources directory.
 // The below causes 'static' to not be part of the URL when static content
 // is requested. So, when requesting static content from HTML pages, do not
 // include static/ in path, instead start at resources/
 app.use(express.static('static'))
 
-// Create HTTPS server
-var server = https.createServer(options, app);
+// Parse request bodies from forms
+app.use(bp.urlencoded({ extended: false }));
 
-// Start server
-server.listen(port, () => {
-    console.log(`smcshane.com running on port ${port}`)
+// Create servers
+var httpsServer = https.createServer(options, app);
+var httpServer = http.createServer(httpApp);
+
+// Start servers
+httpsServer.listen(httpsPort, () => {
+    console.log(`smcshane.com running on port ${httpsPort}.`)
+})
+httpServer.listen(httpPort, () => {
+    console.log(`smcshane.com running on port ${httpPort}. All traffic will be redirected to HTTPS.`)
 })
