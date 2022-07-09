@@ -16,6 +16,9 @@ const http = require('http');
 const app = express()
 const httpApp = express()
 
+// Parse request bodies from forms. Allows for HTML forms to be HTTP POST here.
+app.use(bp.urlencoded({ extended: true }));
+
 // Redirect all HTTP traffic to HTTPS
 httpApp.get('*', (req, res) => {
     res.redirect('https://' + req.headers.host + req.url);
@@ -68,9 +71,10 @@ app.get('/contact', (req, res) => {
 
 // contact.html - POST
 app.post('/contact', (req, res) => {
-    console.log(req)
-    // console.log(`email: ${req.body.email}`)
-    // console.log(`message: ${req.body.message}`)
+    console.log(`${new Date()} Received message:`)
+    console.log(`  name: ${req.body.name}`)
+    console.log(`  email: ${req.body.email}`)
+    console.log(`  message: ${req.body.message}`)
     res.writeHead(200)
     res.end()
 })
@@ -151,7 +155,7 @@ app.get('/upick', (req, res) => {
 })
 
 console.log('== SERVER STARTING ==')
-console.log(new Date())
+console.log(`${new Date()}`)
 
 // Port for server to listen on; HTTPS port
 const httpsPort = 443
@@ -171,17 +175,16 @@ var options = {
 // include static/ in path, instead start at resources/
 app.use(express.static('static'))
 
-// Parse request bodies from forms
-app.use(bp.urlencoded({ extended: false }));
-
 // Create servers
 var httpsServer = https.createServer(options, app);
 var httpServer = http.createServer(httpApp);
 
-// Start servers
+// Start HTTPS server
 httpsServer.listen(httpsPort, () => {
     console.log(`smcshane.com running on port ${httpsPort}.`)
 })
+
+// Start HTTP server - traffic will be redirected to HTTPS
 httpServer.listen(httpPort, () => {
     console.log(`smcshane.com running on port ${httpPort}. All traffic will be redirected to HTTPS.`)
 })
