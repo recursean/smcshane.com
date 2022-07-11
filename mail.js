@@ -24,6 +24,8 @@ const TOKEN_PATH = 'token.json';
  * @param {*} emailText Email body to send
  */
 function initGmail(emailText, sendEmailFlag) {
+    console.log('Gmail API initializing')
+
     // Load client secrets from a local file.
     fs.readFile(__dirname + '/../gmail-credentials.json', (err, content) => {
         if (err) {
@@ -53,6 +55,7 @@ function authorize(credentials, callback, emailText, sendEmailFlag) {
             return getNewToken(oAuth2Client, callback, emailText, sendEmailFlag);
         }
         oAuth2Client.setCredentials(JSON.parse(token));
+        console.log('Gmail API initialized - Existing auth')
         if(sendEmailFlag) {
             callback(oAuth2Client, emailText);
         }
@@ -93,6 +96,7 @@ function getNewToken(oAuth2Client, callback, emailText, sendEmailFlag) {
                 }
                 console.log('Token stored to', TOKEN_PATH);
             });
+            console.log('Gmail API initialized - Fresh auth')
             if(sendEmailFlag) {
                 callback(oAuth2Client, emailText);
             }

@@ -185,6 +185,11 @@ app.use(express.static('static'))
 var httpsServer = https.createServer(options, app);
 var httpServer = http.createServer(httpApp);
 
+// Start HTTP server - traffic will be redirected to HTTPS
+httpServer.listen(httpPort, () => {
+    console.log(`smcshane.com running on port ${httpPort}. All traffic will be redirected to HTTPS.`)
+})
+
 // Start HTTPS server
 httpsServer.listen(httpsPort, () => {
     console.log(`smcshane.com running on port ${httpsPort}.`)
@@ -192,11 +197,7 @@ httpsServer.listen(httpsPort, () => {
     // Ensure Gmail services are initialized. If token.json has not been 
     // created, manual auth flow will need to be followed. Because the auth
     // code will need pasted into command prompt, nohup can not be used and
-    // server must be started with interactive prompt.
+    // server must be started with interactive prompt. Whichever google 
+    // account is used in the auth flow will be used to send emails.
     mail.initEmail()
-})
-
-// Start HTTP server - traffic will be redirected to HTTPS
-httpServer.listen(httpPort, () => {
-    console.log(`smcshane.com running on port ${httpPort}. All traffic will be redirected to HTTPS.`)
 })
