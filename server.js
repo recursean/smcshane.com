@@ -12,6 +12,7 @@ const fs = require('fs')
 const fsp = require('fs').promises
 const https = require('https')
 const http = require('http');
+const mail = require('./mail.js');
 
 const app = express()
 const httpApp = express()
@@ -75,8 +76,13 @@ app.post('/contact', (req, res) => {
     console.log(`  name: ${req.body.name}`)
     console.log(`  email: ${req.body.email}`)
     console.log(`  message: ${req.body.message}`)
-    res.writeHead(200)
-    res.end()
+    console.log('Forwarding via email')
+
+    const emailString = `<p><b>Name: </b>${req.body.name}</p><p><b>Email: </b>${req.body.email}</p><p><b>Message: </b>${req.body.message}</p>`
+    mail.sendEmail(emailString)
+
+    // Redirect to contact GET
+    res.redirect('/contact')
 })
 
 // index.html
@@ -182,6 +188,12 @@ var httpServer = http.createServer(httpApp);
 // Start HTTPS server
 httpsServer.listen(httpsPort, () => {
     console.log(`smcshane.com running on port ${httpsPort}.`)
+
+    // Ensure Gmail services are initialized. If token.json has not been 
+    // created, manual auth flow will need to be followed. Because the auth
+    // code will need pasted into command prompt, nohup can not be used and
+    // server must be started with interactive prompt.
+    mail.initEmail()
 })
 
 // Start HTTP server - traffic will be redirected to HTTPS
