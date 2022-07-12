@@ -11,11 +11,13 @@ const mail = require('./mail.js');
 const logMessage = require('./js/log.js');
 
 // HTML pages that will be read in at server startup
+var aboutHtml
 var arphotoviewPrivacyHtml
 var arphotoviewHtml
 var contactHtml 
 var indexHtml
 var newscloudHtml
+var photosHtml
 var safHtml
 var upickHtml
 var upickPrivacyHtml
@@ -30,6 +32,13 @@ function setRoutes(app, httpApp) {
     // Redirect all HTTP traffic to HTTPS
     httpApp.get('*', (req, res) => {
         res.redirect('https://' + req.headers.host + req.url);
+    })
+    
+    // about.html
+    app.get('/about', (req, res) => {
+        res.setHeader("Content-Type", "text/html");
+        res.writeHead(200)
+        res.end(aboutHtml)
     })
     
     // arphotoview-privacy.html
@@ -83,6 +92,13 @@ function setRoutes(app, httpApp) {
         res.end(newscloudHtml)
     })
     
+    // photos.html
+    app.get('/photos', (req, res) => {
+        res.setHeader("Content-Type", "text/html");
+        res.writeHead(200)
+        res.end(photosHtml)
+    })
+    
     // saf.html
     app.get('/saf', (req, res) => {
         res.setHeader("Content-Type", "text/html");
@@ -132,11 +148,13 @@ function startServer() {
 
     // Read in HTML files that will be served
     logMessage('HTML files read start')
+    aboutHtml = fs.readFileSync(__dirname + '/html/about.html');
     arphotoviewPrivacyHtml = fs.readFileSync(__dirname + '/html/arphotoview-privacy.html');
     arphotoviewHtml = fs.readFileSync(__dirname + '/html/arphotoview.html');
     contactHtml = fs.readFileSync(__dirname + '/html/contact.html');
     indexHtml = fs.readFileSync(__dirname + '/html/index.html');
     newscloudHtml = fs.readFileSync(__dirname + '/html/newscloud.html');
+    photosHtml = fs.readFileSync(__dirname + '/html/photos.html');
     safHtml = fs.readFileSync(__dirname + '/html/saf.html');
     upickHtml = fs.readFileSync(__dirname + '/html/upick.html');
     upickPrivacyHtml = fs.readFileSync(__dirname + '/html/upick-privacy.html');
