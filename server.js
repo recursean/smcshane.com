@@ -1,8 +1,5 @@
 /**
  * This is the main web server for smcshane.com
- * 
- * TODO:
- * - Read files only once at startup of server
  */
 
 const express = require('express')
@@ -11,7 +8,7 @@ const fs = require('fs')
 const https = require('https')
 const http = require('http');
 const mail = require('./mail.js');
-const logMessage = require('./log.js');
+const logMessage = require('./js/log.js');
 
 // HTML pages that will be read in at server startup
 var arphotoviewPrivacyHtml
