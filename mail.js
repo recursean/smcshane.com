@@ -1,8 +1,8 @@
 const readline = require('readline');
 const {google} = require('googleapis');
-const nodemailer = require("nodemailer");
 const MailComposer = require('nodemailer/lib/mail-composer');
 const fs = require('fs')
+const logMessage = require('./log.js');
 
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
@@ -24,12 +24,12 @@ const TOKEN_PATH = 'token.json';
  * @param {*} emailText Email body to send
  */
 function initGmail(emailText, sendEmailFlag) {
-    console.log('Gmail API initializing')
+    logMessage('Gmail API initializing')
 
     // Load client secrets from a local file.
     fs.readFile(__dirname + '/../gmail-credentials.json', (err, content) => {
         if (err) {
-            return console.log('Error loading client secret file:', err);
+            return logMessage('Error loading client secret file:', err);
         }
         
         // Authorize a client with credentials, then call the Gmail API.
@@ -55,7 +55,7 @@ function authorize(credentials, callback, emailText, sendEmailFlag) {
             return getNewToken(oAuth2Client, callback, emailText, sendEmailFlag);
         }
         oAuth2Client.setCredentials(JSON.parse(token));
-        console.log('Gmail API initialized - Existing auth')
+        logMessage('Gmail API initialized - Existing auth')
         if(sendEmailFlag) {
             callback(oAuth2Client, emailText);
         }
@@ -77,7 +77,7 @@ function getNewToken(oAuth2Client, callback, emailText, sendEmailFlag) {
       access_type: 'offline',
       scope: SCOPES,
     });
-    console.log('Authorize Gmail API by visiting this url:', authUrl);
+    logMessage('Authorize Gmail API by visiting this url:', authUrl);
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -94,9 +94,9 @@ function getNewToken(oAuth2Client, callback, emailText, sendEmailFlag) {
                 if (err) {
                     return console.error(err);
                 }
-                console.log('Token stored to', TOKEN_PATH);
+                logMessage('Gmail API token stored to', TOKEN_PATH);
             });
-            console.log('Gmail API initialized - Fresh auth')
+            logMessage('Gmail API initialized - Fresh auth')
             if(sendEmailFlag) {
                 callback(oAuth2Client, emailText);
             }
