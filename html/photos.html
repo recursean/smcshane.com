@@ -19,21 +19,6 @@
 
         <!-- Photo gallery js -->
         <script>
-
-            // Used to show hidden groups of images. Not currently used.
-            var showCount = 1;
-            function showHiddenImages() {
-                const hiddenImages = document.getElementsByClassName(`noShow${showCount++}`);
-                
-                for(var i = 0; i < hiddenImages.length; i++) { 
-                    hiddenImages[i].style.display = "flex";
-                }
-
-                if(showCount == 4) {
-                    document.getElementById('showMoreButton').style.display = "none";
-                }
-            }
-
             // Display image in full res in new tab
             function displayImageFull(imgUrl) {
                 window.open(imgUrl.replace('-SmallScaled', ''), '_blank');
@@ -97,7 +82,7 @@
 
         <!-- Main image -->
         <div class="container">
-            <p class="mx-auto my-2 bg-dark text-light">Click on an image to view in full resolution.</p>
+            <p class="mx-auto my-2 py-2 bg-dark text-light">Click on an image to view in full resolution.</p>
             <!-- Gallery -->
             <div class="row">
                 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
@@ -117,49 +102,49 @@
                 
                     <img
                         src="../resources/images/Gallery/IMG_2186-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow1 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Sunflower, Sunflower Festival"
                         onclick="displayImageFull(this.src)"
                     />
                            
                     <img
                         src="../resources/images/Gallery/IMG_3260-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow1 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Hells Hollow, McConnells Mill State Park"
                         onclick="displayImageFull(this.src)"
                     />
                            
                     <img
                         src="../resources/images/Gallery/IMG_2212-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow2 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Plane backyard"
                         onclick="displayImageFull(this.src)"
                     />
                            
                     <img
                         src="../resources/images/Gallery/IMG_4904-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow2 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Lower Yosemite Falls, Yosemite National Park"
                         onclick="displayImageFull(this.src)"
                     />
                            
                     <img
                         src="../resources/images/Gallery/IMG_4797-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow3 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="El Capitan, Yosemite National Park"
                         onclick="displayImageFull(this.src)"
                     />
                            
                     <img
                         src="../resources/images/Gallery/IMG_2237-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow3 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Cardinal backyard"
                         onclick="displayImageFull(this.src)"
                     />
                            
                     <img
                         src="../resources/images/Gallery/IMG_5840-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow4 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Fall Run Falls"
                         onclick="displayImageFull(this.src)"
                     />
@@ -182,35 +167,35 @@
 
                     <img
                         src="../resources/images/Gallery/IMG_4328-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow1 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Ohiopyle waterfall"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_3834-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow2 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Washington Crossing Bridge"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_6003-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow3 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Smithfield Falls"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_4499-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow3 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="McConnells Mill State Park"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_3137-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow4 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Deer backyard"
                         onclick="displayImageFull(this.src)"
                     />
@@ -233,55 +218,54 @@
                     
                     <img
                         src="../resources/images/Gallery/IMG_3193-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow1 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Deer backyard"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_2140-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow1 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Moon"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_4338-3-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow2 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Cucumber Falls, Ohiopyle"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_0416-2-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow2 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Astro photography, Colorado"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_5565-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow3 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Buttermilk Falls"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_3133-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow3 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Turkeys backyard"
                         onclick="displayImageFull(this.src)"
                     />
 
                     <img
                         src="../resources/images/Gallery/IMG_4315-SmallScaled.jpg"
-                        class="w-100 shadow-1-strong rounded mb-4 noShow4 galleryImage" 
+                        class="w-100 shadow-1-strong rounded mb-4 galleryImage" 
                         alt="Ohiopyle"
                         onclick="displayImageFull(this.src)"
                     />
                 </div>
             </div>
-            <!-- <button class="mx-auto my-2 btn btn-dark" id="showMoreButton" onclick="showHiddenImages()">Show more</button> -->
         </div>
 
         <!-- Footer -->
