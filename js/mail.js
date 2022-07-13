@@ -27,7 +27,7 @@ function initGmail(emailText, sendEmailFlag) {
     logMessage('Gmail API initializing')
 
     // Load client secrets from a local file.
-    fs.readFile(__dirname + '/../gmail-credentials.json', (err, content) => {
+    fs.readFile(__dirname + '/../../gmail-credentials.json', (err, content) => {
         if (err) {
             return logMessage('Error loading client secret file:', err);
         }

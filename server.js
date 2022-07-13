@@ -7,7 +7,7 @@ const bp = require('body-parser')
 const fs = require('fs')
 const https = require('https')
 const http = require('http');
-const mail = require('./mail.js');
+const mail = require('./js/mail.js');
 const logMessage = require('./js/log.js');
 
 // HTML pages that will be read in at server startup
