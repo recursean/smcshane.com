@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nohup authbind --deep node server.js > server.out &"
+    "start": "nohup authbind --deep node server.js > server.out &",
+    "stop": "bash scripts/stop-server.sh"
   },
   "repository": {
     "type": "git",
