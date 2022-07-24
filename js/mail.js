@@ -77,7 +77,7 @@ function getNewToken(oAuth2Client, callback, emailText, sendEmailFlag) {
       access_type: 'offline',
       scope: SCOPES,
     });
-    logMessage('Authorize Gmail API by visiting this url:', authUrl);
+    logMessage(`Authorize Gmail API by visiting this url: ${authUrl}`);
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
