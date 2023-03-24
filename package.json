@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nohup authbind --deep node server.js > server.out &",
-    "stop": "bash scripts/stop-server.sh"
+    "stop": "bash scripts/stop-server.sh",
+    "cert": "bash scripts/refresh-cert.sh"
   },
   "repository": {
     "type": "git",
